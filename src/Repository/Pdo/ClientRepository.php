@@ -60,16 +60,12 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
      */
     protected function isGranted(array $row, ?string $grantType = null): bool
     {
-        switch ($grantType) {
-            case 'authorization_code':
-                return ! ($row['personal_access_client'] || $row['password_client']);
-            case 'personal_access':
-                return (bool) $row['personal_access_client'];
-            case 'password':
-                return (bool) $row['password_client'];
-            default:
-                return true;
-        }
+        return match ($grantType) {
+            'authorization_code' => ! ($row['personal_access_client'] || $row['password_client']),
+            'personal_access' => (bool) $row['personal_access_client'],
+            'password' => (bool) $row['password_client'],
+            default => true,
+        };
     }
 
     private function getClientData(string $clientIdentifier): ?array

@@ -68,7 +68,7 @@ class OAuth2Adapter implements AuthenticationInterface
                     ]
                 );
             }
-        } catch (OAuthServerException $exception) {
+        } catch (OAuthServerException) {
             return null;
         }
         return null;
