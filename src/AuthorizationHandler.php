@@ -25,16 +25,13 @@ use function is_callable;
  */
 class AuthorizationHandler implements RequestHandlerInterface
 {
-    private AuthorizationServer $server;
-
-    private ResponseFactoryInterface $responseFactory;
+    private readonly ResponseFactoryInterface $responseFactory;
 
     /**
      * @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory
      */
-    public function __construct(AuthorizationServer $server, $responseFactory)
+    public function __construct(private readonly AuthorizationServer $server, $responseFactory)
     {
-        $this->server = $server;
         if (is_callable($responseFactory)) {
             $responseFactory = new CallableResponseFactoryDecorator(
                 static fn(): ResponseInterface => $responseFactory()

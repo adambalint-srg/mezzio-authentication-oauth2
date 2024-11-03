@@ -492,11 +492,8 @@ class OAuth2PdoMiddlewareTest extends TestCase
     {
         return new class ($authHandler) implements RequestHandlerInterface
         {
-            private AuthorizationHandler $handler;
-
-            public function __construct(AuthorizationHandler $handler)
+            public function __construct(private readonly AuthorizationHandler $handler)
             {
-                $this->handler = $handler;
             }
 
             public function handle(
