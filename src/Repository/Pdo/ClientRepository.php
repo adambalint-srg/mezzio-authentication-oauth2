@@ -55,8 +55,6 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
 
     /**
      * Check the grantType for the client value, stored in $row
-     *
-     * @param array  $row
      */
     protected function isGranted(array $row, ?string $grantType = null): bool
     {

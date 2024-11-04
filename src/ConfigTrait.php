@@ -95,9 +95,6 @@ trait ConfigTrait
         return $config['grants'];
     }
 
-    /**
-     * @return array
-     */
     protected function getListenersConfig(ContainerInterface $container): array
     {
         $config = $container->get('config')['authentication'] ?? [];
@@ -114,9 +111,6 @@ trait ConfigTrait
         return $config['event_listeners'];
     }
 
-    /**
-     * @return array
-     */
     protected function getListenerProvidersConfig(ContainerInterface $container): array
     {
         $config = $container->get('config')['authentication'] ?? [];
