@@ -14,6 +14,12 @@
 
 declare(strict_types=1);
 
+use League\OAuth2\Server\Grant\AuthCodeGrant;
+use League\OAuth2\Server\Grant\ClientCredentialsGrant;
+use League\OAuth2\Server\Grant\ImplicitGrant;
+use League\OAuth2\Server\Grant\PasswordGrant;
+use League\OAuth2\Server\Grant\RefreshTokenGrant;
+
 $config = [
     'private_key'          => getcwd() . '/data/oauth/private.key',
     'public_key'           => getcwd() . '/data/oauth/public.key',
@@ -28,16 +34,11 @@ $config = [
 
     // Set value to null to disable a grant
     'grants' => [
-        League\OAuth2\Server\Grant\ClientCredentialsGrant::class
-            => League\OAuth2\Server\Grant\ClientCredentialsGrant::class,
-        League\OAuth2\Server\Grant\PasswordGrant::class
-            => League\OAuth2\Server\Grant\PasswordGrant::class,
-        League\OAuth2\Server\Grant\AuthCodeGrant::class
-            => League\OAuth2\Server\Grant\AuthCodeGrant::class,
-        League\OAuth2\Server\Grant\ImplicitGrant::class
-            => League\OAuth2\Server\Grant\ImplicitGrant::class,
-        League\OAuth2\Server\Grant\RefreshTokenGrant::class
-            => League\OAuth2\Server\Grant\RefreshTokenGrant::class,
+        ClientCredentialsGrant::class => ClientCredentialsGrant::class,
+        PasswordGrant::class          => PasswordGrant::class,
+        AuthCodeGrant::class          => AuthCodeGrant::class,
+        ImplicitGrant::class          => ImplicitGrant::class,
+        RefreshTokenGrant::class      => RefreshTokenGrant::class,
     ],
 ];
 

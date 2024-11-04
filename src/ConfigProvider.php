@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Authentication\OAuth2;
 
-use Laminas\ServiceManager\ConfigInterface;
+use Laminas\ServiceManager\ServiceManager;
 use League\OAuth2\Server\AuthorizationServer;
 use League\OAuth2\Server\Grant\AuthCodeGrant;
 use League\OAuth2\Server\Grant\ClientCredentialsGrant;
@@ -28,7 +28,7 @@ use Mezzio\Authentication\OAuth2\Repository\Pdo;
 
 /**
  * @codeCoverageIgnore
- * @psalm-import-type ServiceManagerConfigurationType from ConfigInterface
+ * @psalm-import-type ServiceManagerConfiguration from ServiceManager
  */
 class ConfigProvider
 {
@@ -47,7 +47,7 @@ class ConfigProvider
     /**
      * Returns the container dependencies
      *
-     * @return ServiceManagerConfigurationType
+     * @return ServiceManagerConfiguration
      */
     public function getDependencies(): array
     {
