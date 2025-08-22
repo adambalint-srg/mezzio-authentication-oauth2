@@ -18,7 +18,7 @@ class RefreshTokenRepository extends AbstractRepository implements RefreshTokenR
         return new RefreshTokenEntity();
     }
 
-    public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity)
+    public function persistNewRefreshToken(RefreshTokenEntityInterface $refreshTokenEntity): void
     {
         $sth = $this->pdo->prepare(
             'INSERT INTO oauth_refresh_tokens (id, access_token_id, revoked, expires_at) '
@@ -41,10 +41,7 @@ class RefreshTokenRepository extends AbstractRepository implements RefreshTokenR
         }
     }
 
-    /**
-     * @param string $tokenId
-     */
-    public function revokeRefreshToken($tokenId)
+    public function revokeRefreshToken(string $tokenId): void
     {
         $sth = $this->pdo->prepare(
             'UPDATE oauth_refresh_tokens SET revoked=:revoked WHERE id = :tokenId'
@@ -55,10 +52,7 @@ class RefreshTokenRepository extends AbstractRepository implements RefreshTokenR
         $sth->execute();
     }
 
-    /**
-     * @param string $tokenId
-     */
-    public function isRefreshTokenRevoked($tokenId): bool
+    public function isRefreshTokenRevoked(string $tokenId): bool
     {
         $sth = $this->pdo->prepare(
             'SELECT revoked FROM oauth_refresh_tokens WHERE id = :tokenId'

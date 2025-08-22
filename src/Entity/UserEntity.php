@@ -19,6 +19,6 @@ class UserEntity implements UserEntityInterface
      */
     public function __construct($identifier)
     {
-        $this->setIdentifier($identifier);
+        $this->setIdentifier((string) $identifier);
     }
 }

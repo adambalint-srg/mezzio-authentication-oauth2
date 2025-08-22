@@ -129,7 +129,7 @@ class AuthorizationServerFactory
                 }
                 $provider = $container->get($provider);
             }
-            $authServer->getEmitter()->useListenerProvider($provider);
+            $authServer->getEmitter()->subscribeListenersFrom($provider);
         }
     }
 }

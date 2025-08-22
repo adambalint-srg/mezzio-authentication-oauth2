@@ -15,7 +15,7 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
     /**
      * {@inheritDoc}
      */
-    public function getClientEntity($clientIdentifier): ?ClientEntityInterface
+    public function getClientEntity(string $clientIdentifier): ?ClientEntityInterface
     {
         $clientData = $this->getClientData($clientIdentifier);
 
@@ -34,7 +34,7 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
     /**
      * {@inheritDoc}
      */
-    public function validateClient($clientIdentifier, $clientSecret, $grantType): bool
+    public function validateClient(string $clientIdentifier, ?string $clientSecret, ?string $grantType): bool
     {
         $clientData = $this->getClientData($clientIdentifier);
 

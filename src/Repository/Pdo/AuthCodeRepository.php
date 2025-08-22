@@ -16,7 +16,7 @@ class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositor
     /**
      * {@inheritDoc}
      */
-    public function getNewAuthCode()
+    public function getNewAuthCode(): AuthCodeEntityInterface
     {
         return new AuthCodeEntity();
     }
@@ -24,7 +24,7 @@ class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositor
     /**
      * {@inheritDoc}
      */
-    public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity)
+    public function persistNewAuthCode(AuthCodeEntityInterface $authCodeEntity): void
     {
         $sth = $this->pdo->prepare(
             'INSERT INTO oauth_auth_codes (id, user_id, client_id, scopes, revoked, expires_at) '
@@ -52,7 +52,7 @@ class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositor
     /**
      * {@inheritDoc}
      */
-    public function revokeAuthCode($codeId)
+    public function revokeAuthCode(string $codeId): void
     {
         $sth = $this->pdo->prepare(
             'UPDATE oauth_auth_codes SET revoked=:revoked WHERE id = :codeId'
@@ -66,7 +66,7 @@ class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositor
     /**
      * {@inheritDoc}
      */
-    public function isAuthCodeRevoked($codeId)
+    public function isAuthCodeRevoked(string $codeId): bool
     {
         $sth = $this->pdo->prepare(
             'SELECT revoked FROM oauth_auth_codes WHERE id = :codeId'
