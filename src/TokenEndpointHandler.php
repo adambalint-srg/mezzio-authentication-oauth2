@@ -26,18 +26,15 @@ use function is_callable;
  */
 class TokenEndpointHandler implements RequestHandlerInterface
 {
-    /** @var AuthorizationServer */
-    protected $server;
-
-    /** @var ResponseFactoryInterface */
-    protected $responseFactory;
+    protected ResponseFactoryInterface $responseFactory;
 
     /**
      * @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory
      */
-    public function __construct(AuthorizationServer $server, $responseFactory)
-    {
-        $this->server = $server;
+    public function __construct(
+        protected AuthorizationServer $server,
+        callable|ResponseFactoryInterface $responseFactory
+    ) {
         if (is_callable($responseFactory)) {
             $responseFactory = new CallableResponseFactoryDecorator(
                 static fn(): ResponseInterface => $responseFactory()

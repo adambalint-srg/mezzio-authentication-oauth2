@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Authentication\OAuth2;
 
+use Closure;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\ResourceServer;
 use Mezzio\Authentication\AuthenticationInterface;
@@ -17,25 +18,18 @@ use function is_callable;
 
 class OAuth2Adapter implements AuthenticationInterface
 {
-    /** @var ResourceServer */
-    protected $resourceServer;
+    protected ResponseFactoryInterface $responseFactory;
 
-    /** @var callable */
-    protected $responseFactory;
-
-    /** @var ResponseFactoryInterface */
-    protected $userFactory;
+    protected Closure $userFactory;
 
     /**
      * @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory
      */
     public function __construct(
-        ResourceServer $resourceServer,
-        $responseFactory,
+        protected ResourceServer $resourceServer,
+        callable|ResponseFactoryInterface $responseFactory,
         callable $userFactory
     ) {
-        $this->resourceServer = $resourceServer;
-
         if (is_callable($responseFactory)) {
             $responseFactory = new CallableResponseFactoryDecorator(
                 static fn(): ResponseInterface => $responseFactory()

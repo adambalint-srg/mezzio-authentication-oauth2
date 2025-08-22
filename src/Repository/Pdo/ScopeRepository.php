@@ -37,8 +37,6 @@ class ScopeRepository extends AbstractRepository implements ScopeRepositoryInter
 
     /**
      * @param ScopeEntityInterface[] $scopes
-     * @param string                 $grantType
-     * @param null|string            $userIdentifier
      * @return ScopeEntityInterface[]
      */
     public function finalizeScopes(

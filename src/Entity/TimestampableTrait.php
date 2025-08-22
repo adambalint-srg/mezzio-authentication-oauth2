@@ -12,11 +12,9 @@ use function method_exists;
 
 trait TimestampableTrait
 {
-    /** @var DateTimeInterface */
-    protected $createdAt;
+    protected DateTimeInterface $createdAt;
 
-    /** @var DateTimeInterface */
-    protected $updatedAt;
+    protected DateTimeInterface $updatedAt;
 
     public function getCreatedAt(): DateTimeInterface
     {
@@ -44,7 +42,7 @@ trait TimestampableTrait
      */
     public function timestampOnCreate(): void
     {
-        if (! $this->createdAt) {
+        if (! isset($this->createdAt)) {
             if (method_exists($this, 'getTimezone')) {
                 $this->createdAt = new DateTimeImmutable('now', new DateTimeZone($this->getTimezone()->getValue()));
             } else {

@@ -12,15 +12,8 @@ use function trim;
 
 class AbstractRepository
 {
-    /** @var PdoService */
-    protected $pdo;
-
-    /**
-     * Constructor
-     */
-    public function __construct(PDO $pdo)
+    public function __construct(protected PDO $pdo)
     {
-        $this->pdo = $pdo;
     }
 
     /**
@@ -35,6 +28,13 @@ class AbstractRepository
             return '';
         }
 
-        return trim(array_reduce($scopes, static fn($result, $item): string => $result . ' ' . $item->getIdentifier()));
+        return trim(array_reduce(
+            $scopes,
+            static function (?string $result, ScopeEntityInterface $item): string {
+                $result = $result ?? '';
+
+                return $result . ' ' . $item->getIdentifier();
+            }
+        ));
     }
 }

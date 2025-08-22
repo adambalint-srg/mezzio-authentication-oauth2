@@ -13,12 +13,6 @@ use function password_verify;
 
 class UserRepository extends AbstractRepository implements UserRepositoryInterface
 {
-    /**
-     * @param string $username
-     * @param string $password
-     * @param string $grantType
-     * @return UserEntity|void
-     */
     public function getUserEntityByUserCredentials(
         string $username,
         string $password,

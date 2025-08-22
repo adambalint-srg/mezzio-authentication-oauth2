@@ -6,8 +6,7 @@ namespace Mezzio\Authentication\OAuth2\Entity;
 
 trait RevokableTrait
 {
-    /** @var bool */
-    protected $revoked;
+    protected bool $revoked = false;
 
     public function isRevoked(): bool
     {

@@ -30,8 +30,10 @@ class AuthorizationHandler implements RequestHandlerInterface
     /**
      * @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory
      */
-    public function __construct(private readonly AuthorizationServer $server, $responseFactory)
-    {
+    public function __construct(
+        private readonly AuthorizationServer $server,
+        callable|ResponseFactoryInterface $responseFactory
+    ) {
         if (is_callable($responseFactory)) {
             $responseFactory = new CallableResponseFactoryDecorator(
                 static fn(): ResponseInterface => $responseFactory()
