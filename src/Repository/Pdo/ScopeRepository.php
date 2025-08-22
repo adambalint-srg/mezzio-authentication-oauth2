@@ -31,7 +31,7 @@ class ScopeRepository extends AbstractRepository implements ScopeRepositoryInter
         }
 
         $scope = new ScopeEntity();
-        $scope->setIdentifier($row['id']);
+        $scope->setIdentifier((string) $row['id']);
         return $scope;
     }
 

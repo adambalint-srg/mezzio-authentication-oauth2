@@ -12,7 +12,7 @@ use function is_array;
 trait ConfigTrait
 {
     /** @return non-empty-string|non-empty-array */
-    protected function getPrivateKey(ContainerInterface $container)
+    protected function getPrivateKey(ContainerInterface $container): array|string
     {
         $config = $container->get('config')['authentication'] ?? [];
 
@@ -111,6 +111,9 @@ trait ConfigTrait
         return $config['event_listeners'];
     }
 
+    /**
+     * @return array<int, non-empty-string>
+     */
     protected function getListenerProvidersConfig(ContainerInterface $container): array
     {
         $config = $container->get('config')['authentication'] ?? [];

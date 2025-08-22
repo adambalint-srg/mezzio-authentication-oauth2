@@ -10,6 +10,7 @@ use League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface;
 use Mezzio\Authentication\OAuth2\Entity\AuthCodeEntity;
 
 use function date;
+use function is_array;
 
 class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositoryInterface
 {
@@ -78,6 +79,6 @@ class AuthCodeRepository extends AbstractRepository implements AuthCodeRepositor
         }
         $row = $sth->fetch();
 
-        return isset($row['revoked']) ? (bool) $row['revoked'] : false;
+        return is_array($row) && isset($row['revoked']) ? (bool) $row['revoked'] : false;
     }
 }

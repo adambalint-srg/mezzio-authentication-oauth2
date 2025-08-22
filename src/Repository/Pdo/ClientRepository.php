@@ -8,12 +8,14 @@ use League\OAuth2\Server\Entities\ClientEntityInterface;
 use League\OAuth2\Server\Repositories\ClientRepositoryInterface;
 use Mezzio\Authentication\OAuth2\Entity\ClientEntity;
 
+use function is_array;
+use function is_string;
 use function password_verify;
 
 class ClientRepository extends AbstractRepository implements ClientRepositoryInterface
 {
     /**
-     * {@inheritDoc}
+     * @param non-empty-string $clientIdentifier
      */
     public function getClientEntity(string $clientIdentifier): ?ClientEntityInterface
     {
@@ -25,8 +27,8 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
 
         return new ClientEntity(
             $clientIdentifier,
-            $clientData['name'] ?? '',
-            $clientData['redirect'] ?? '',
+            (string) ($clientData['name'] ?? ''),
+            (string) ($clientData['redirect'] ?? ''),
             (bool) ($clientData['is_confidential'] ?? null)
         );
     }
@@ -46,7 +48,11 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
             return false;
         }
 
-        if (empty($clientData['secret']) || ! password_verify((string) $clientSecret, $clientData['secret'])) {
+        if (
+            empty($clientData['secret'])
+            || ! is_string($clientData['secret'])
+            || ! password_verify((string) $clientSecret, $clientData['secret'])
+        ) {
             return false;
         }
 
@@ -66,6 +72,9 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
         };
     }
 
+    /**
+     * @return array<array-key, mixed>|null
+     */
     private function getClientData(string $clientIdentifier): ?array
     {
         $statement = $this->pdo->prepare(
@@ -79,7 +88,7 @@ class ClientRepository extends AbstractRepository implements ClientRepositoryInt
 
         $row = $statement->fetch();
 
-        if (empty($row)) {
+        if (empty($row) || ! is_array($row)) {
             return null;
         }
 

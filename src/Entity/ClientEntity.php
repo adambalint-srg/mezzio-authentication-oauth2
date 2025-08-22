@@ -26,6 +26,7 @@ class ClientEntity implements ClientEntityInterface
     /**
      * Constructor
      *
+     * @param non-empty-string $identifier
      * @return void
      */
     public function __construct(string $identifier, string $name, string $redirectUri, bool $isConfidential = false)

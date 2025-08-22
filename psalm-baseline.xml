@@ -101,27 +101,12 @@
   </file>
   <file src="src/Entity/ClientEntity.php">
     <PropertyNotSetInConstructor>
-      <code><![CDATA[$passwordClient]]></code>
-      <code><![CDATA[$personalAccessClient]]></code>
-      <code><![CDATA[$secret]]></code>
       <code><![CDATA[ClientEntity]]></code>
       <code><![CDATA[ClientEntity]]></code>
       <code><![CDATA[ClientEntity]]></code>
     </PropertyNotSetInConstructor>
   </file>
-  <file src="src/Entity/RevokableTrait.php">
-    <MissingConstructor>
-      <code><![CDATA[$revoked]]></code>
-      <code><![CDATA[$revoked]]></code>
-      <code><![CDATA[$revoked]]></code>
-      <code><![CDATA[$revoked]]></code>
-    </MissingConstructor>
-  </file>
   <file src="src/Entity/TimestampableTrait.php">
-    <DocblockTypeContradiction>
-      <code><![CDATA[! $this->createdAt]]></code>
-      <code><![CDATA[$this->createdAt]]></code>
-    </DocblockTypeContradiction>
     <MissingConstructor>
       <code><![CDATA[$createdAt]]></code>
       <code><![CDATA[$createdAt]]></code>
@@ -146,44 +131,14 @@
                 static fn(): ResponseInterface => $responseFactory()
             )]]></code>
     </DeprecatedClass>
-    <InvalidFunctionCall>
-      <code><![CDATA[($this->userFactory)(
-                    $userId,
-                    [],
-                    [
-                        'oauth_user_id'         => $userId,
-                        'oauth_client_id'       => $clientId,
-                        'oauth_access_token_id' => $result->getAttribute('oauth_access_token_id', null),
-                        'oauth_scopes'          => $result->getAttribute('oauth_scopes', null),
-                    ]
-                )]]></code>
-    </InvalidFunctionCall>
-    <InvalidMethodCall>
-      <code><![CDATA[createResponse]]></code>
-    </InvalidMethodCall>
-    <InvalidPropertyAssignmentValue>
-      <code><![CDATA[$responseFactory]]></code>
-      <code><![CDATA[static fn(string $identity, array $roles = [], array $details = []): UserInterface
-                => $userFactory($identity, $roles, $details)]]></code>
-    </InvalidPropertyAssignmentValue>
     <MixedAssignment>
       <code><![CDATA[$clientId]]></code>
     </MixedAssignment>
     <MixedInferredReturnType>
       <code><![CDATA[?UserInterface]]></code>
-      <code><![CDATA[ResponseInterface]]></code>
       <code><![CDATA[UserInterface]]></code>
     </MixedInferredReturnType>
-    <MixedMethodCall>
-      <code><![CDATA[withHeader]]></code>
-    </MixedMethodCall>
     <MixedReturnStatement>
-      <code><![CDATA[$this->responseFactory
-            ->createResponse(401)
-            ->withHeader(
-                'WWW-Authenticate',
-                'Bearer realm="OAuth2 token"'
-            )]]></code>
       <code><![CDATA[$userFactory($identity, $roles, $details)]]></code>
       <code><![CDATA[($this->userFactory)(
                     $userId,
@@ -220,40 +175,12 @@
       <code><![CDATA[ResponseFactoryFactory]]></code>
     </UndefinedClass>
   </file>
-  <file src="src/Repository/Pdo/AbstractRepository.php">
-    <MixedMethodCall>
-      <code><![CDATA[getIdentifier]]></code>
-    </MixedMethodCall>
-    <MixedOperand>
-      <code><![CDATA[$item->getIdentifier()]]></code>
-      <code><![CDATA[$result]]></code>
-    </MixedOperand>
-    <PropertyTypeCoercion>
-      <code><![CDATA[$pdo]]></code>
-    </PropertyTypeCoercion>
-  </file>
-  <file src="src/Repository/Pdo/AccessTokenRepository.php">
-    <MissingReturnType>
-      <code><![CDATA[persistNewAccessToken]]></code>
-      <code><![CDATA[revokeAccessToken]]></code>
-    </MissingReturnType>
-    <MixedArgument>
-      <code><![CDATA[$userIdentifier]]></code>
-    </MixedArgument>
-  </file>
   <file src="src/Repository/Pdo/AccessTokenRepositoryFactory.php">
     <MixedArgument>
       <code><![CDATA[$container->get(PdoService::class)]]></code>
     </MixedArgument>
   </file>
   <file src="src/Repository/Pdo/AuthCodeRepository.php">
-    <MissingReturnType>
-      <code><![CDATA[persistNewAuthCode]]></code>
-      <code><![CDATA[revokeAuthCode]]></code>
-    </MissingReturnType>
-    <MixedArrayAccess>
-      <code><![CDATA[$row['revoked']]]></code>
-    </MixedArrayAccess>
     <MixedAssignment>
       <code><![CDATA[$row]]></code>
     </MixedAssignment>
@@ -262,22 +189,6 @@
     <MixedArgument>
       <code><![CDATA[$container->get(PdoService::class)]]></code>
     </MixedArgument>
-  </file>
-  <file src="src/Repository/Pdo/ClientRepository.php">
-    <MixedArgument>
-      <code><![CDATA[$clientData['name'] ?? '']]></code>
-      <code><![CDATA[$clientData['redirect'] ?? '']]></code>
-      <code><![CDATA[$clientData['secret']]]></code>
-    </MixedArgument>
-    <MixedAssignment>
-      <code><![CDATA[$row]]></code>
-    </MixedAssignment>
-    <MixedInferredReturnType>
-      <code><![CDATA[?array]]></code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement>
-      <code><![CDATA[$row]]></code>
-    </MixedReturnStatement>
   </file>
   <file src="src/Repository/Pdo/ClientRepositoryFactory.php">
     <MixedArgument>
@@ -311,10 +222,6 @@
     </MixedReturnStatement>
   </file>
   <file src="src/Repository/Pdo/RefreshTokenRepository.php">
-    <MissingReturnType>
-      <code><![CDATA[persistNewRefreshToken]]></code>
-      <code><![CDATA[revokeRefreshToken]]></code>
-    </MissingReturnType>
     <MixedArrayAccess>
       <code><![CDATA[$row['revoked']]]></code>
     </MixedArrayAccess>
